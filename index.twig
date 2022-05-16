@@ -24,9 +24,8 @@
     {% block header %}
         <div class="sp-flex">
             <div class="sp-flex-none">
-                <a href="{{ route('core.operator.dashboard') }}" class="sp-block sp-p-2 sm:sp-px-4 hover:sp-bg-primary-900">
-                    <img src="{{ get_icon('resources/assets/operator/images/logo_icon.png') }}"
-                         alt="{{ Config.get('settings.brand_name') }}" class="sp-h-8" />
+                <a href="{{ urldecode(route('ticket.operator.ticket', manageTicketsParams)) }}" class="sp-block sp-p-2 sm:sp-px-4 hover:sp-bg-primary-900">
+                    <img src="{{ get_icon('resources/assets/operator/images/logo_icon.png') }}" alt="{{ Config.get('settings.brand_name') }}" class="sp-h-8" />
                 </a>
             </div>
 
