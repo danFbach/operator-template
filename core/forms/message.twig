@@ -15,7 +15,23 @@
 
 {% block content %}
 
-    {% for message in messages %}
+    <h2>{{ Lang.get('general.reply') }}</h2>
+
+    {{ form_open({'method': 'PUT', 'route': ['core.operator.message.update', conversation_id], 'class': 'validate'}) }}
+        {{ form_hidden('conversation_id', conversation_id) }}
+
+        <div class="sp-form-row">
+            <div class="sp-input-container">
+                {{ form_editor('message') }}
+            </div>
+        </div>
+
+        <div class="sp-form-button">
+            {{ form_submit(Lang.get('general.send')) }}
+        </div>
+    {{ form_close() }}
+
+    {% for message in messages|reverse %}
         <div class="sp-message sp-message-{{ message.id }}">
             <div class="sp-flex">
                 <div class="sp-flex-initial sp-hidden sp-mr-4 md:sp-block">
@@ -43,22 +59,6 @@
             </div>
         </div>
     {% endfor %}
-
-    <h2>{{ Lang.get('general.reply') }}</h2>
-
-    {{ form_open({'method': 'PUT', 'route': ['core.operator.message.update', conversation_id], 'class': 'validate'}) }}
-        {{ form_hidden('conversation_id', conversation_id) }}
-
-        <div class="sp-form-row">
-            <div class="sp-input-container">
-                {{ form_editor('message') }}
-            </div>
-        </div>
-
-        <div class="sp-form-button">
-            {{ form_submit(Lang.get('general.send')) }}
-        </div>
-    {{ form_close() }}
 
 {% endblock %}
 
