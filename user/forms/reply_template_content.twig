@@ -1,0 +1,45 @@
+<div class="section-item sp-form-container sp-border-t-0 {% if hide|default is not empty %}sp-hidden{% endif %}">
+
+    <div class="sp-form-row">
+        {{ form_label('reply_template[' ~ brand.id ~ '][' ~ department ~ '][department]', Lang.choice('ticket.department', 1)) }}
+        <div class="sp-input-container">
+            {{
+                form_hidden(
+                    'reply_template[' ~ brand.id ~ '][' ~ department ~ '][department]',
+                    department,
+                    hide|default is not empty ? { 'disabled': 'disabled' } : []
+                )
+            }}
+
+            <span class="item-type">
+                {% if replyTemplate.department.name is empty %}
+                    -- {{ Lang.get('general.any') }} --
+                {% else %}
+                    {{ replyTemplate.department.name }}
+                {% endif %}
+            </span> &nbsp;
+
+            <!-- Only don't show on default brand, -- Any -- department -->
+            {{ form_button(Lang.get('general.remove'),
+                {'class': 'remove-button' ~ (brand.id == 'Default' and replyTemplate.department.name is empty ? ' sp-hidden' : '')}
+            ) }}
+
+        </div>
+    </div>
+
+    <div class="sp-form-row sp-form-full" data-brand="{{ brand.id }}">
+        {{ form_label('reply_template[' ~ brand.id ~ '][' ~ department ~ '][contents]', Lang.choice('user.reply_template', 1)) }}
+        <div class="sp-input-container">
+            {{
+                form_editor_mf(
+                    'reply_template[' ~ brand.id ~ '][' ~ department ~ '][contents]',
+                    replyTemplate.contents,
+                    hide|default is not empty ? {'disabled': 'disabled'} : [],
+                    [],
+                    false
+                )
+            }}
+        </div>
+    </div>
+
+</div>
